@@ -35,3 +35,4 @@ server/instaKeys.js
 server/twitterKeys.js
 docs
 .idea/
+.env
