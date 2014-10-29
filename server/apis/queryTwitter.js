@@ -46,6 +46,8 @@ var getAvailableTrendingCities = function(callback){
       T.get('trends/available',function(err, data, response){
         if(!!err){throw 'Error: ' + err;}
           callback(err,data);
+        client.set('trends/available', response);
+        client.expire('trends/available', 100);
       });
     }
   }

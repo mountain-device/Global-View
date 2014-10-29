@@ -43,6 +43,7 @@ module.exports = function(query, location, queryAmount, callback) {
     } else {
       request(site, function(error, res, body) {
         client.set(search, body);
+        client.expire(search, 100);
         callback(error, getNews(body));
       });
     }
