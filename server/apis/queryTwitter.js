@@ -13,6 +13,14 @@ var trendingPlaces ={
   obj:''
 };
 
+var redis = require("redis"),
+  client = redis.createClient();
+
+client.on("error", function (err) {
+  console.log("Error " + err);
+});
+
+
 /**
 * T is an instance of Twit
 * T contains the app-specific authorization keys
