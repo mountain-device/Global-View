@@ -16,7 +16,7 @@ module.exports = function(params, callback) {
   yelp.search({term: "food", location: params.city}, function(error, dataFood) {
   	
   	if (error) console.log(error);
-	  console.log(results);
+	  console.log(dataFood);
 	  callback(error, dataFood);
 
   });

@@ -1,8 +1,9 @@
 /*
-* Tweet Controller (Depreciated) - Will work if used. Alows for gathering tweets directly.
+* Restaurant Controller. Alows for gathering restaurants from Yelp.
 */
-angular.module('restaurants', ['globalMethods', 'storedData','yelp'])
-.controller('TweetsController', function ($scope, StoredData, GlobalMethods) {
+angular.module('restaurants', ['globalMethods', 'storedData'])
+.controller('RestaurantsController', function ($scope, StoredData, GlobalMethods) {
   $scope.data = StoredData;
   $scope.GlobalMethods = GlobalMethods;
+  console.log("RestaurantsController: ", $scope.data);
 });

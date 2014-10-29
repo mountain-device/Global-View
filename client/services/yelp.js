@@ -1,7 +1,7 @@
 /*
 *  Grabs Photos from instagram
 */
-angular.module('restaurants', [])
+angular.module('yelp', [])
 .factory('Restaurants', function($http) {
   /**
   * @function

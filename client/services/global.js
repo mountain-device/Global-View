@@ -28,7 +28,7 @@ angular.module('globalMethods', [
   'googleNews', 
   'instagram', 
   'location',
-  'restaurants'
+  'yelp'
 ])
 .factory('GlobalMethods', function(GoogleNews, Instagram, Twitter, Location, Restaurants, StoredData) {
   /**
@@ -44,7 +44,8 @@ angular.module('globalMethods', [
   var getNews = function(request) {
     GoogleNews.getNews(request)
       .then(function(result) {
-        StoredData.news = result.data;
+        console.log("GoogleNews: ", result);
+        StoredData.news = result;
       });
   };
   /**
@@ -125,9 +126,10 @@ angular.module('globalMethods', [
   */
   var getRestaurants = function(request) {
 
-    console.log('just got called');
-    Yelp.getRestaurants(request)
+    console.log('getRestaurants just got called');
+    Restaurants.getRestaurants(request)
     .then(function(results) {
+      console.log("getRestaurants: ", results);
       StoredData.restaurants = results;
       // store in database
       console.log(results);
