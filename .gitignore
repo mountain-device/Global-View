@@ -33,3 +33,4 @@ client/views/splash/splash-help.css
 server/instaKeys.js
 server/twitterKeys.js
 docs
+.idea/
