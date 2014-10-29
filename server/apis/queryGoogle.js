@@ -12,7 +12,15 @@ var descriptionSelector = 'div.st';
 var titleSelector = 'h3.r a';
 var removSel = 'div.s';
 
+
 var URL = 'http://www.google.com/search?hl=en&q=%s&start=0&sa=N&num=%s&ie=UTF-8&oe=UTF-8&tbm=nws';
+
+var redis = require("redis"),
+      client = redis.createClient();
+
+client.on("error", function (err) {
+  console.log("Error " + err);
+});
 
 /**
 * Scrapes news.google.com and returns an array of results;
@@ -29,9 +37,17 @@ module.exports = function(query, location, queryAmount, callback) {
   queryAmount = queryAmount > 50 ? 50 : queryAmount;
   var site = util.format(URL, querystring.escape(search), queryAmount);
 
-  request(site, function(error, res, body) {
-    callback(error, getNews(body));
+  client.get(search, function(err, reply){
+    if (reply) {
+      callback(err, getNews(reply));
+    } else {
+      request(site, function(error, res, body) {
+        client.set(search, body);
+        callback(error, getNews(body));
+      });
+    }
   });
+
 };
 
 /** 
