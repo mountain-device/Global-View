@@ -23,6 +23,8 @@ angular.module('splashBox', ['globalMethods'])
     GlobalMethods.setCity(requestObj);
     GlobalMethods.getTweets(requestObj);
     GlobalMethods.getPhotos(requestObj);
+    GlobalMethods.getRestaurants(requestObj);
+    
   };
 });
 

@@ -18,7 +18,8 @@ angular.module('storedData', [])
     currentCity: {},
     currentTrends: [],
     cities: cityList,
-    tweets: []
+    tweets: [],
+    restaurants: []
   };
 });
 
@@ -26,9 +27,10 @@ angular.module('globalMethods', [
   'twitter', 
   'googleNews', 
   'instagram', 
-  'location'
+  'location',
+  'yelp'
 ])
-.factory('GlobalMethods', function(GoogleNews, Instagram, Twitter, Location, StoredData) {
+.factory('GlobalMethods', function(GoogleNews, Instagram, Twitter, Location, Restaurants, StoredData) {
   /**
   * @function
   * @memberof AngularModule_Factories.GlobalMethods
@@ -42,7 +44,9 @@ angular.module('globalMethods', [
   var getNews = function(request) {
     GoogleNews.getNews(request)
       .then(function(result) {
-        StoredData.news = result.data;
+        // TODO : remove once functionality is complete
+        console.log("GoogleNews: ", result);
+        StoredData.news = result;
       });
   };
   /**
@@ -119,6 +123,23 @@ angular.module('globalMethods', [
   /**
   * @function
   * @memberof AngularModule_Factories.GlobalMethods
+  * @description Note: No Arguments. Function Calls Server and retrieves a list of cities and trending topics for those cities. WIP. Stores the results in [StoredData]{@link AngularModule_Factories.StoredData}
+  */
+  var getRestaurants = function(request) {
+
+    console.log('getRestaurants just got called');
+    Restaurants.getRestaurants(request)
+    .then(function(results) {
+      StoredData.restaurants = results;
+      // store in database
+      // TODO: remove once functionality is complete
+      console.log(results);
+    });
+  };
+
+  /**
+  * @function
+  * @memberof AngularModule_Factories.GlobalMethods
   * @description This function calls accesses the news angular modular to get news and return the news to [StoredData]{@link AngularModule_Factories.StoredData}
   * @param {object} request Request object for request
   * @param {string} request.city Name of City
@@ -149,7 +170,8 @@ angular.module('globalMethods', [
     getTweets: getTweets,
     getNews: getNews,
     getTrendingCities: getTrendingCities,
-    setCity: setCity
+    setCity: setCity,
+    getRestaurants: getRestaurants
   };
 });
 

@@ -4,6 +4,7 @@
 var queryGoogle = require('../apis/queryGoogle');
 var queryInstagram = require('../apis/queryInstagram');
 var queryTwitter = require('../apis/queryTwitter');
+var queryYelp = require('../apis/queryYelp');
 
 /**
 * Receives GET requests from /api/google
@@ -18,7 +19,7 @@ exports.google = function(req, res) {
   var query = req.query;
   query.amount = query.amount || 5;
   queryGoogle(query.query, query.location, query.amount, function(err, newsResults) {
-    if (!!err) { throw 'Error: ' + err; }
+    if (!!err) { console.log(err); }
 
     var sendBack = {
       result: 'Request Received!',
@@ -41,7 +42,7 @@ exports.google = function(req, res) {
 
 exports.twitterTrendingCities = function(req, res){
   queryTwitter.getAvailableTrendingCities(function(err, trendingCities){
-    if (!!err) { throw 'Error: '+ err;}
+    if (!!err) { console.log(err);}
     var response = {
       status:200,
       result: 'Request Received!',
@@ -55,7 +56,7 @@ exports.twitterTrendingCities = function(req, res){
 exports.tweetsForTrend = function(req, res){
   var query = req.query;
   queryTwitter.getTweetsForTrendObjects([query], function(err, tweets){
-    if(!!err){throw 'Error: '+err}
+    if(!!err){console.log(err)}
     var response = {
       status:200,
       result: 'Request Received!',
@@ -69,14 +70,14 @@ exports.twitter = function(req, res) {
   var query = req.query;
   console.log(query);
   queryTwitter.getAvailableTrendingCities(function(err, trendingCities){
-    if(!!err){ throw 'Error: '+ err;}
+    if(!!err){ console.log(err);}
     var woeid = queryTwitter.getCityId(query, trendingCities);
     if(Array.isArray(woeid)){
       queryTwitter.getClosestTrendingCity(query, function(err, data){
         //console.log(data);
         if(!!err){ 'Error: ' + err;}
         queryTwitter.getTrendingTopics(data[0]['woeid'], function(err, trendingTopics){
-          if(!!err){ throw 'Error: '+err;}
+          if(!!err){ console.log(err);}
           queryTwitter.getTweetsForTrendObjects(trendingTopics, 0, function(err, tweets){
             var response = {
               status:200,
@@ -89,7 +90,7 @@ exports.twitter = function(req, res) {
       });
     } else{
         queryTwitter.getTrendingTopics(woeid, function(err, trendingTopics){
-          if(!!err){ throw 'Error: '+err;}
+          if(!!err){ console.log(err);}
           queryTwitter.getTweetsForTrendObjects(trendingTopics, function(err, tweets){
             var response = {
               status:200,
@@ -126,11 +127,39 @@ exports.instagram = function(req, res) {
   };
 
   queryInstagram(qParams, function(err, photos) {
-    if(!!err) { throw 'Error: ' + err; }
+    if(!!err) { console.log(err); }
     var response = {
       result: 'Request Received!',
       data: photos
     };
     res.json(response);
+  });
+};
+
+/**
+* Receives GET requests from /api/yelp
+* @function
+* @memberof module:helpers
+* @alias exports.google
+* @param {object} req Request Parameter from GET Request
+* @param {object} res Response Parameter from GET Request
+* @returns {json} Sends Client a JSON Object containing an Array of Google News Stories
+*/
+exports.yelp = function(req, res) {
+  var params = {
+    city: req.query.city,
+    state: req.query.state
+  };
+
+  // query.amount = query.amount || 5;
+  queryYelp(params, function(err, results) {
+    if (!!err) { console.log(err); }
+
+    var sendBack = {
+      result: 'Request Received!',
+      data: results
+    };
+
+    res.json(sendBack)
   });
 };
