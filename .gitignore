@@ -31,3 +31,7 @@ node_modules/
 client/lib
 client/views/splash/splash-help.css
 docs
+server/instaKeys.js
+server/twitterKeys.js
+docs
+.idea/
