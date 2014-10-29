@@ -39,10 +39,16 @@ var T = new Twit({
 * @function
 */
 var getAvailableTrendingCities = function(callback){
-  T.get('trends/available',function(err, data, response){
-    if(!!err){throw 'Error: ' + err;}
-      callback(err,data);
-  });
+  client.get('trends/available', function(err, reply){
+    if (reply){
+      callback(err, reply);
+    } else {
+      T.get('trends/available',function(err, data, response){
+        if(!!err){throw 'Error: ' + err;}
+          callback(err,data);
+      });
+    }
+  }
 };
 
 /**
