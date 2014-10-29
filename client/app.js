@@ -7,7 +7,8 @@ angular.module('vantage', [
   'splashMain',
   'splashBox',
   'topics',
-  'ngRoute'
+  'ngRoute',
+  'restaurants'
 ])
 .config(function($routeProvider, $httpProvider) {
   $routeProvider

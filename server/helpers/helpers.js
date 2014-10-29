@@ -4,6 +4,7 @@
 var queryGoogle = require('../apis/queryGoogle');
 var queryInstagram = require('../apis/queryInstagram');
 var queryTwitter = require('../apis/queryTwitter');
+var queryYelp = require('../apis/queryYelp');
 
 /**
 * Receives GET requests from /api/google
@@ -132,5 +133,34 @@ exports.instagram = function(req, res) {
       data: photos
     };
     res.json(response);
+  });
+};
+
+/**
+* Receives GET requests from /api/yelp
+* @function
+* @memberof module:helpers
+* @alias exports.google
+* @param {object} req Request Parameter from GET Request
+* @param {object} res Response Parameter from GET Request
+* @returns {json} Sends Client a JSON Object containing an Array of Google News Stories
+*/
+exports.yelp = function(req, res) {
+  console.log(req);
+  var params = {
+    city: req.query.city,
+    state: req.query.state
+  };
+
+  // query.amount = query.amount || 5;
+  queryYelp(params, function(err, newsResults) {
+    if (!!err) { throw 'Error: ' + err; }
+
+    var sendBack = {
+      result: 'Request Received!',
+      data: newsResults
+    };
+
+    res.json(sendBack)
   });
 };
