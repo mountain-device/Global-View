@@ -13,23 +13,8 @@ var yelp = require("yelp").createClient(authKeys);
 */
 module.exports = function(params, callback) {
  
-  yelp.search({term: "food", location: params.city}, function(error, dataFood) {
-  	
+  yelp.search({term: "food", location: params.city}, function(error, dataFood) {	
   	if (error) console.log(error);
-	  console.log(dataFood);
 	  callback(error, dataFood);
-
   });
 };
-
-// See http://www.yelp.com/developers/documentation/v2/search_api
-// yelp.search({term: "food", location: "Montreal"}, function(error, data) {
-//   console.log(error);
-//   console.log(data);
-// });
-
-// See http://www.yelp.com/developers/documentation/v2/business
-// yelp.business("yelp-san-francisco", function(error, data) {
-//   console.log(error);
-//   console.log(data);
-// });

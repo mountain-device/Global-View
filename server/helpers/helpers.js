@@ -146,7 +146,6 @@ exports.instagram = function(req, res) {
 * @returns {json} Sends Client a JSON Object containing an Array of Google News Stories
 */
 exports.yelp = function(req, res) {
-  console.log(req);
   var params = {
     city: req.query.city,
     state: req.query.state

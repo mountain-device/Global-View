@@ -44,6 +44,7 @@ angular.module('globalMethods', [
   var getNews = function(request) {
     GoogleNews.getNews(request)
       .then(function(result) {
+        // TODO : remove once functionality is complete
         console.log("GoogleNews: ", result);
         StoredData.news = result;
       });
@@ -129,11 +130,10 @@ angular.module('globalMethods', [
     console.log('getRestaurants just got called');
     Restaurants.getRestaurants(request)
     .then(function(results) {
-      console.log("getRestaurants: ", results);
       StoredData.restaurants = results;
       // store in database
+      // TODO: remove once functionality is complete
       console.log(results);
-
     });
   };
 
