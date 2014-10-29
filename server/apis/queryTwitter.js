@@ -13,6 +13,14 @@ var trendingPlaces ={
   obj:''
 };
 
+var redis = require("redis"),
+  client = redis.createClient();
+
+client.on("error", function (err) {
+  console.log("Error " + err);
+});
+
+
 /**
 * T is an instance of Twit
 * T contains the app-specific authorization keys
@@ -31,10 +39,16 @@ var T = new Twit({
 * @function
 */
 var getAvailableTrendingCities = function(callback){
-  T.get('trends/available',function(err, data, response){
-    if(!!err){throw 'Error: ' + err;}
-      callback(err,data);
-  });
+  client.get('trends/available', function(err, reply){
+    if (reply){
+      callback(err, reply);
+    } else {
+      T.get('trends/available',function(err, data, response){
+        if(!!err){throw 'Error: ' + err;}
+          callback(err,data);
+      });
+    }
+  }
 };
 
 /**
