@@ -1,5 +1,7 @@
-<div id="yelpContainer" class="block yelp_block">
-  <div class="restaurants" ng-repeat="item in data">
-      <span>{{item.restaurants}}</span>
+<div id="yelpContainer" class="block">
+  <div class="photo_grid">
+    <span ng-repeat="obj in data.restaurants">
+      <a href="{{obj.url}}" target="_blank"><img class="photo" src="{{obj.image_url}}"></a>
+    </span>
   </div>
 </div>
