@@ -35,5 +35,8 @@
     "twit": "^1.1.18",
     "util": "^0.10.3",
     "yelp": "^0.1.1"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
   }
 }
