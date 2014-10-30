@@ -130,10 +130,10 @@ angular.module('globalMethods', [
     console.log('getRestaurants just got called');
     Restaurants.getRestaurants(request)
     .then(function(results) {
-      StoredData.restaurants = results;
+      StoredData.restaurants = results.data.businesses;
       // store in database
       // TODO: remove once functionality is complete
-      console.log(results);
+      console.log(StoredData.restaurants);
     });
   };
 
