@@ -1,6 +1,7 @@
 language: node_js
+
 node_js:
-  - "0.11"
+- '0.11'
 
 notifications:
   email:
@@ -9,5 +10,13 @@ notifications:
       - allenkrulwich@gmail.com
       - carlgoldberg1236@gmail.com
       - supriya.bhat@gmail.com
-    on_success: [always|never|change] # default: change
-    on_failure: [always|never|change] # default: always
+    on_success:
+      - always|never|change
+    on_failure:
+      - always|never|change
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: PYwZ8HPqO5bBZlEabNw6fJNunh34tEH3oi8Ydk5nJhgVIBiTZHXJWLXvX+DYIpgCvk0jzEaKxMODqiXxqDbvsi6CRPSJFotejq+a2GKN9ghTJ6ZOX7+ikFizTZAgjN0nEHy+mwxjL+QR4PKSTcF5ddx9Oi2smSlMcaAPn6cxNME=
+  app: mountain-device-globalview
