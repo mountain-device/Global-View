@@ -4,7 +4,7 @@
 var request = require('request');
 var util = require('util');
 var _ = require('lodash');
-var instaKeys = require('../instaKeys');
+var instaKeys = require('../InstaKeys');
 
 /**
 * instaSettings contains the various API endpoint URLs
