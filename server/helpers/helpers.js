@@ -127,6 +127,7 @@ exports.instagram = function(req, res) {
   };
 
   queryInstagram(qParams, function(err, photos) {
+
     if(!!err) { console.log(err); }
     var response = {
       result: 'Request Received!',
