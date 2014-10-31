@@ -13,8 +13,16 @@ var trendingPlaces ={
   obj:''
 };
 
-var redis = require("redis"),
-  client = redis.createClient();
+var env = process.env.NODE_ENV || 'development';
+
+if ('development' == env) {
+   var redis = require("redis"),
+    client = redis.createClient();
+}
+else { 
+​  ​var rtg​ ​= require("url").parse(process.env.REDISTOGO_URL);
+​  ​var redis = require("redis").createClient(rtg.port, rtg.hostname);
+}
 
 client.on("error", function (err) {
   console.log("Error " + err);
@@ -50,7 +58,7 @@ var getAvailableTrendingCities = function(callback){
         client.expire('trends/available', 100);
       });
     }
-  }
+  });
 };
 
 /**
