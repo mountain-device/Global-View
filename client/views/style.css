@@ -92,6 +92,11 @@ a:hover {
   margin: 0 auto;
 }
 
+.photo_yelp {
+  margin-top: 100px;
+  /*margin: 0 auto;*/
+}
+
 .twitter_block {
   margin-left: 40px;
 }

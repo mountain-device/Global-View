@@ -35,6 +35,7 @@ var dayInMilliSeconds = 24 * 60 * 60 * 1000;
 * @param {function} callback Callback function invoked on response results
 */
 module.exports = function(allParameters, callback) {
+
   var minDate = Math.floor(allParameters.minDate/1000) || Date.now() - dayInMilliSeconds;
   var maxDate = Math.floor(allParameters.maxDate/1000) || Date.now();
   var lat = parseFloat(allParameters.lat) || null;
@@ -56,7 +57,7 @@ module.exports = function(allParameters, callback) {
   }
 
   request(requestURL,function(error, res, body) {
-    if(error) {
+    if(!!error) {
       console.log(error);
     } else {
       var results = JSON.parse(body);
