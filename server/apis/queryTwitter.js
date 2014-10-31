@@ -18,10 +18,9 @@ var env = process.env.NODE_ENV || 'development';
 if ('development' == env) {
    var redis = require("redis"),
     client = redis.createClient();
-}
-else { 
-​  ​var rtg​ ​= require("url").parse(process.env.REDISTOGO_URL);
-​  ​var redis = require("redis").createClient(rtg.port, rtg.hostname);
+} else {
+  var rtg = require("url").parse(process.env.REDISTOGO_URL);
+  var redis = require("redis").createClient(rtg.port, rtg.hostname);
 }
 
 client.on("error", function (err) {

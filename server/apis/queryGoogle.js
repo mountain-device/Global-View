@@ -15,13 +15,14 @@ var removSel = 'div.s';
 
 var URL = 'http://www.google.com/search?hl=en&q=%s&start=0&sa=N&num=%s&ie=UTF-8&oe=UTF-8&tbm=nws';
 
+var env = process.env.NODE_ENV || 'development';
+
 if ('development' == env) {
    var redis = require("redis"),
     client = redis.createClient();
-}
-else { 
-​  ​var rtg​ ​= require("url").parse(process.env.REDISTOGO_URL);
-​  ​var redis = require("redis").createClient(rtg.port, rtg.hostname);
+} else {
+  var rtg = require("url").parse(process.env.REDISTOGO_URL);
+  var redis = require("redis").createClient(rtg.port, rtg.hostname);
 }
 
 client.on("error", function (err) {
